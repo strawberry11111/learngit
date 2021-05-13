@@ -1,2 +1,4 @@
 this is for git test
 second line
+git has a mutable index called stage
+git tracks changes
