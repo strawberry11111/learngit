@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js">
+
+    </script>
+    <style>
+        #mapid { height: 1080px; }
+    </style>
+</head>
+<body>
+    <div id="mapid">
+        <script>
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'sk.eyJ1Ijoib294eCIsImEiOiJjanMwZGdreXQxaTdpNDNxcjBmMDIyNzgxIn0.Is_7fpNUy-6bCbx5_4wSUA'
+            }).addTo(mymap);
+
+            var latlngs = [
+                [[45.51, -122.68],
+                    [37.77, -122.43],
+                    [34.04, -118.2]],
+                [[40.78, -73.91],
+                    [41.83, -87.62],
+                    [32.76, -96.72]]
+            ];
+
+            var polyline = L.polyline(latlngs, {color: 'red'}).addTo(mymap);
+
+            // zoom the map to the polyline
+            mymap.fitBounds(polyline.getBounds());
+
+        </script>
+    </div>
+</body>
+</html>

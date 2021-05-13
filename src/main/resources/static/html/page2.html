@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#bt1").click(function(){
+                $.get("/AllPeople",function(json){
+                    $.each(json,function (i,item) {
+                        var id = item.id;
+                        var name = item.name;
+                        var age = item.age;
+                        $("table").append(
+                            "<tr>" +
+                                i+
+                            "<th>" + id + "</th>" +
+                            "<th>" + name + "</th>" +
+                            "<th>" + age + "</th>" +
+                            "</tr>");
+
+                    });
+                });
+            });
+
+            $("#bt2").click(function () {
+                $.get("/OnePersonInfo" + "?id=" + $("#getOnePerson").val(),function (data) {
+                    $("#OnePersonInfo").append(data.name);
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<button id="bt1">展示所有顾客信息</button>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+</table>
+
+<p>请输入查询的用户ID：<input type="text" id="getOnePerson" value=""></p>
+<button id="bt2">查询</button>
+<p id="OnePersonInfo">该用户的姓名为：</p>
+</body>
+</html>
